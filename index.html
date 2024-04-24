@@ -42,6 +42,18 @@
             background-color: gray;
         }
 
+        .feature-card {
+            cursor: pointer;
+        }
+
+        .software-card {
+            cursor: pointer;
+        }
+
+        .solution-card {
+            cursor: pointer;
+        }
+
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 10px 5px lightgreen; }
             50% { box-shadow: 0 0 15px 8px lightgreen; }
@@ -50,9 +62,6 @@
 
         .chip-card.active {
             background-color: lightgreen;
-            box-shadow: 0 0 10px 5px lightgreen;
-            transition: box-shadow 0.5s ease;
-            animation: pulseGlow 2s ease-in-out infinite alternate;
         }
 
         .card {
@@ -70,6 +79,12 @@
             background-color: lightgreen;
         }
 
+        .primary-selector {
+            box-shadow: 0 0 10px 5px lightgreen;
+            transition: box-shadow 0.5s ease;
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
         .card-info {
             position: absolute;
             bottom: 5px;
@@ -83,12 +98,14 @@
     <h1>ESP32 Chip Quest</h1>
 
     <div class="container">
+        <h2>Chips</h2>
         <div class="chips-row">
-
         </div>
+
         <h2>Features</h2>
         <div class="features-row">
         </div>
+
         <h2>Software</h2>
         <div class="software-row">
         </div>
@@ -190,12 +207,15 @@
         chipCards.forEach(card => {
             card.addEventListener('click', () => {
                 chipCards.forEach(c => c.classList.remove('active'));
+                chipCards.forEach(c => c.classList.remove('primary-selector'));
                 card.classList.add('active');
+                card.classList.add('primary-selector');
 
                 const selectedChip = card.id;
 
                 featureCards.forEach(c => {
                     c.classList.remove('active');
+                    c.classList.remove('primary-selector');
 
                     // Add or display info
                     let infoDiv = c.querySelector('.card-info');
@@ -216,6 +236,7 @@
 
                 softwareCards.forEach(c => {
                     c.classList.remove('active');
+                    c.classList.remove('primary-selector');
                     if (chipProperties[selectedChip] && chipProperties[selectedChip]['software'] && chipProperties[selectedChip]['software'].includes(c.id)) {
                         c.classList.add('active');
                     }
@@ -223,7 +244,101 @@
 
                 solutionCards.forEach(c => {
                     c.classList.remove('active');
+                    c.classList.remove('primary-selector');
                     if (chipProperties[selectedChip] && chipProperties[selectedChip]['solutions'] && chipProperties[selectedChip]['solutions'].includes(c.id)) {
+                        c.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Handle click on solution cards
+        solutionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                solutionCards.forEach(c => {
+                    c.classList.remove('active')
+                    c.classList.remove('primary-selector');
+                });
+
+                card.classList.add('active');
+                card.classList.add('primary-selector');
+
+                featureCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+                softwareCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+
+                const selectedSolution = card.id;
+                chipCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                    if (chipProperties[c.id] && chipProperties[c.id]['solutions'] && chipProperties[c.id]['solutions'].includes(selectedSolution)) {
+                        c.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Handle click on Software cards
+        softwareCards.forEach(card => {
+            card.addEventListener('click', () => {
+                softwareCards.forEach(c => {
+                    c.classList.remove('active')
+                    c.classList.remove('primary-selector');
+                });
+
+                card.classList.add('active');
+                card.classList.add('primary-selector');
+
+                featureCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+                solutionCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+
+                const selectedSoftware = card.id;
+                chipCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                    if (chipProperties[c.id] && chipProperties[c.id]['software'] && chipProperties[c.id]['software'].includes(selectedSoftware)) {
+                        c.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Handle click on feature cards
+        featureCards.forEach(card => {
+            card.addEventListener('click', () => {
+                featureCards.forEach(c => {
+                    c.classList.remove('active')
+                    c.classList.remove('primary-selector');
+                });
+
+                card.classList.add('active');
+                card.classList.add('primary-selector');
+
+                softwareCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+                solutionCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                });
+
+                const selectedFeature = card.id;
+                chipCards.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('primary-selector');
+                    if (chipProperties[c.id] && chipProperties[c.id][selectedFeature]) {
                         c.classList.add('active');
                     }
                 });
@@ -232,8 +347,7 @@
 
         const esp32S3Card = document.getElementById('ESP32-S3');
         if (esp32S3Card) {
-            esp32S3Card.click(); // Simulate a click to trigger initial selection
-            updateIndicatorPosition(esp32S3Card); // Set the initial indicator position
+            esp32S3Card.click();
         }
 
     </script>
