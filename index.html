@@ -92,6 +92,10 @@
             font-size: 12px;
         }
 
+        .disabled {
+            background-color:lightgray;
+        }
+
     </style>
 </head>
 <body>
@@ -211,6 +215,10 @@
                 card.classList.add('active');
                 card.classList.add('primary-selector');
 
+                featureRow.classList.remove('disabled');
+                softwareRow.classList.remove('disabled');
+                solutionsRow.classList.remove('disabled');
+
                 const selectedChip = card.id;
 
                 featureCards.forEach(c => {
@@ -272,6 +280,10 @@
                     c.classList.remove('primary-selector');
                 });
 
+                solutionsRow.classList.remove('disabled');
+                featureRow.classList.add('disabled');
+                softwareRow.classList.add('disabled');
+
                 const selectedSolution = card.id;
                 chipCards.forEach(c => {
                     c.classList.remove('active');
@@ -303,6 +315,10 @@
                     c.classList.remove('primary-selector');
                 });
 
+                softwareRow.classList.remove('disabled');
+                featureRow.classList.add('disabled');
+                solutionsRow.classList.add('disabled');
+
                 const selectedSoftware = card.id;
                 chipCards.forEach(c => {
                     c.classList.remove('active');
@@ -333,6 +349,10 @@
                     c.classList.remove('active');
                     c.classList.remove('primary-selector');
                 });
+
+                featureRow.classList.remove('disabled');
+                softwareRow.classList.add('disabled');
+                solutionsRow.classList.add('disabled');
 
                 const selectedFeature = card.id;
                 chipCards.forEach(c => {
