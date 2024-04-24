@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Chip Quest</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .chips-row {
+            display: flex;
+        }
+
+        .features-row {
+            display: flex; /* Make features a row */
+            flex-wrap: wrap; /* Allow wrapping to next line */
+        }
+
+        .software-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .chip-card {
+            width: 120px;
+            height: 100px;
+            border: 1px solid gray;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: gray;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px 5px lightgreen; }
+            50% { box-shadow: 0 0 15px 8px lightgreen; }
+            100% { box-shadow: 0 0 10px 5px lightgreen; }
+        }
+
+        .chip-card.active {
+            background-color: lightgreen;
+            box-shadow: 0 0 10px 5px lightgreen;
+            transition: box-shadow 0.5s ease;
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        .card {
+            width: 100px;
+            height: 80px;
+            border: 1px solid gray;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            background-color: gray;
+            position: relative; /* To position info text */
+        }
+
+        .card.active {
+            background-color: lightgreen;
+        }
+
+        .card-info {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>ESP32 Chip Quest</h1>
+
+    <div class="container">
+        <div class="chips-row">
+
+        </div>
+        <h2>Features</h2>
+        <div class="features-row">
+        </div>
+        <h2>Software</h2>
+        <div class="software-row">
+        </div>
+    </div>
+
+    <script>
+    const chips = ['ESP32-S3', 'ESP32-C6', 'ESP32-P4', 'ESP32'];
+        const features = ['RAM', 'LCD', 'CAM', 'USB', 'PSRAM', 'SD/MMC', 'SPI-ETH', 'ETH'];
+        const software = ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'];
+
+        const chipProperties = {
+            'ESP32-S3': {
+                'RAM': {info: '380'},
+                'LCD':  { 'info': '320x200'},
+                'CAM':{},
+                'USB': {'info':'USB2.0' },
+                'SPI-ETH': {},
+                'SD/MMC': {},
+                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+            },
+            'ESP32-C6': {
+                'RAM': {info: '420'},
+                'WiFi' : { 'info':'WiFi 6' },
+                'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+            },
+            'ESP32-P4': {
+                'RAM': {info: '620'},
+                'PSRAM': { 'info': '2-32MB' },
+                'LCD': { 'info': 'MIPI-DSI: 1280x800'},
+                'CAM': {'info': 'MIPI-CSI'},
+                'software': [ 'ESP-IDF', 'Rust']
+            },
+            'ESP32': {
+                'RAM': {info: '400'},
+                'ETH': {},
+                'PSRAM':{ 'info': '2-32MB' },
+                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+            }
+        };
+
+        // Populate chip card elements
+        const chipsRow = document.querySelector('.chips-row');
+        chips.forEach(chip => {
+            const chipCard = document.createElement('div');
+            chipCard.classList.add('chip-card');
+            chipCard.id = chip;
+            chipCard.textContent = chip;
+            chipsRow.appendChild(chipCard);
+        });
+
+        // Populate feature card elements
+        const featureRow = document.querySelector('.features-row');
+        features.forEach(feature => {
+            const featureCard = document.createElement('div');
+            featureCard.classList.add('feature-card');
+            featureCard.classList.add('card');
+            featureCard.id = feature;
+            featureCard.textContent = feature;
+            featureRow.appendChild(featureCard);
+        });
+
+        // Populate software card elements
+        const softwareRow = document.querySelector('.software-row');
+        software.forEach(software => {
+            const softwareCard = document.createElement('div');
+            softwareCard.classList.add('software-card');
+            softwareCard.classList.add('card');
+            softwareCard.id = software;
+            softwareCard.textContent = software;
+            softwareRow.appendChild(softwareCard);
+        });
+
+        const chipCards = document.querySelectorAll('.chip-card');
+        const featureCards = document.querySelectorAll('.feature-card');
+        const softwareCards = document.querySelectorAll('.software-card');
+
+        chipCards.forEach(card => {
+            card.addEventListener('click', () => {
+                chipCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                const selectedChip = card.id;
+
+                featureCards.forEach(c => {
+                    c.classList.remove('active');
+
+                    // Add or display info
+                    let infoDiv = c.querySelector('.card-info');
+                    if (chipProperties[selectedChip] && chipProperties[selectedChip][c.id]) {
+                        if (infoDiv) {
+                            infoDiv.textContent = chipProperties[selectedChip][c.id]['info'];
+                        } else {
+                            infoDiv = document.createElement('div');
+                            infoDiv.classList.add('card-info');
+                            infoDiv.textContent = chipProperties[selectedChip][c.id]['info'];
+                            c.appendChild(infoDiv);
+                        }
+                        c.classList.add('active');
+                    } else if (infoDiv) {
+                        infoDiv.remove();
+                    }
+                });
+
+                softwareCards.forEach(c => {
+                    c.classList.remove('active');
+                    if (chipProperties[selectedChip] && chipProperties[selectedChip]['software'] && chipProperties[selectedChip]['software'].includes(c.id)) {
+                        c.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        const esp32S3Card = document.getElementById('ESP32-S3');
+        if (esp32S3Card) {
+            esp32S3Card.click(); // Simulate a click to trigger initial selection
+            updateIndicatorPosition(esp32S3Card); // Set the initial indicator position
+        }
+
+    </script>
+</body>
+</html>
