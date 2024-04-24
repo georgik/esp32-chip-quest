@@ -26,6 +26,11 @@
             flex-wrap: wrap;
         }
 
+        .solutions-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .chip-card {
             width: 120px;
             height: 100px;
@@ -87,12 +92,18 @@
         <h2>Software</h2>
         <div class="software-row">
         </div>
+
+        <h2>Solutions</h2>
+        <div class="solutions-row">
+        </div>
     </div>
 
     <script>
-    const chips = ['ESP32-S3', 'ESP32-C6', 'ESP32-P4', 'ESP32'];
+        const chips = ['ESP32-S3', 'ESP32-C6', 'ESP32-P4', 'ESP32'];
         const features = ['RAM', 'LCD', 'CAM', 'USB', 'PSRAM', 'SD/MMC', 'SPI-ETH', 'ETH'];
         const software = ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'];
+        const solutions = [ "IoT", "Connectivity", "Low-Power Applications", "Multimedia and HMI"];
+
 
         const chipProperties = {
             'ESP32-S3': {
@@ -102,25 +113,29 @@
                 'USB': {'info':'USB2.0' },
                 'SPI-ETH': {},
                 'SD/MMC': {},
-                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
+                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"]
             },
             'ESP32-C6': {
                 'RAM': {info: '420'},
                 'WiFi' : { 'info':'WiFi 6' },
-                'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+                'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
+                'solutions': [ "IoT", "Connectivity", "Low-Power Applications"]
             },
             'ESP32-P4': {
                 'RAM': {info: '620'},
                 'PSRAM': { 'info': '2-32MB' },
                 'LCD': { 'info': 'MIPI-DSI: 1280x800'},
                 'CAM': {'info': 'MIPI-CSI'},
-                'software': [ 'ESP-IDF', 'Rust']
+                'software': [ 'ESP-IDF', 'Rust'],
+                'solutions': [  "Multimedia and HMI" ]
             },
             'ESP32': {
                 'RAM': {info: '400'},
                 'ETH': {},
                 'PSRAM':{ 'info': '2-32MB' },
-                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std']
+                'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
+                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"]
             }
         };
 
@@ -156,9 +171,21 @@
             softwareRow.appendChild(softwareCard);
         });
 
+        // Populate solution card elements
+        const solutionsRow = document.querySelector('.solutions-row');
+        solutions.forEach(solution => {
+            const solutionCard = document.createElement('div');
+            solutionCard.classList.add('solution-card');
+            solutionCard.classList.add('card');
+            solutionCard.id = solution;
+            solutionCard.textContent = solution;
+            solutionsRow.appendChild(solutionCard);
+        });
+
         const chipCards = document.querySelectorAll('.chip-card');
         const featureCards = document.querySelectorAll('.feature-card');
         const softwareCards = document.querySelectorAll('.software-card');
+        const solutionCards = document.querySelectorAll('.solution-card');
 
         chipCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -190,6 +217,13 @@
                 softwareCards.forEach(c => {
                     c.classList.remove('active');
                     if (chipProperties[selectedChip] && chipProperties[selectedChip]['software'] && chipProperties[selectedChip]['software'].includes(c.id)) {
+                        c.classList.add('active');
+                    }
+                });
+
+                solutionCards.forEach(c => {
+                    c.classList.remove('active');
+                    if (chipProperties[selectedChip] && chipProperties[selectedChip]['solutions'] && chipProperties[selectedChip]['solutions'].includes(c.id)) {
                         c.classList.add('active');
                     }
                 });
