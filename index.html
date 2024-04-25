@@ -102,11 +102,19 @@
             font-size: 12px;
         }
 
+        .card-icon {
+            position: absolute;
+            top: 1em;
+            left: 30%;
+            font-size: 2em;
+        }
+
         .disabled {
             background-color:lightgray;
         }
 
     </style>
+    <script src="https://kit.fontawesome.com/2eb6c86393.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>ESP32 Chip Quest</h1>
@@ -138,10 +146,21 @@
 
         const chipProperties = {
             'ESP32-S3': {
-                'RAM': {info: '380'},
-                'LCD':  { 'info': '320x200'},
-                'CAM':{},
-                'USB': {'info':'USB2.0' },
+                'RAM': {
+                    'info': '380',
+                    'memory': 'fa-memory'
+                },
+                'LCD':  {
+                    'info': '320x200',
+                    'icon': 'fa-display'
+                },
+                'CAM':{
+                    'icon': 'fa-camera'
+                },
+                'USB': {
+                    'info':'USB2.0',
+                    'icon': 'fa-usb'
+                },
                 'SPI-ETH': {},
                 'SD/MMC': {},
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
@@ -149,23 +168,38 @@
                 'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32-C6': {
-                'RAM': {info: '420'},
+                'RAM': {
+                    'info': '420',
+                    'memory': 'fa-memory'
+                },
                 'WiFi' : { 'info':'WiFi 6' },
                 'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
                 'solutions': [ "IoT", "Connectivity", "Low-Power Applications"],
                 'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32-P4': {
-                'RAM': {info: '620'},
+                'RAM': {
+                    'info': '620',
+                    'memory': 'fa-memory'
+                },
                 'PSRAM': { 'info': '2-32MB' },
-                'LCD': { 'info': 'MIPI-DSI: 1280x800'},
-                'CAM': {'info': 'MIPI-CSI'},
+                'LCD': {
+                    'info': 'MIPI-DSI: 1280x800',
+                    'icon': 'fa-display'
+                },
+                'CAM': {
+                    'info': 'MIPI-CSI',
+                    'icon': 'fa-video'
+                },
                 'software': [ 'ESP-IDF', 'Rust'],
                 'solutions': [  "Multimedia and HMI" ],
                 'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32': {
-                'RAM': {info: '400'},
+                'RAM': {
+                    info: '400',
+                    'memory': 'fa-memory'
+                },
                 'ETH': {},
                 'PSRAM':{ 'info': '2-32MB' },
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
@@ -261,6 +295,23 @@
                         c.classList.add('active');
                     } else if (infoDiv) {
                         infoDiv.remove();
+                    }
+
+                    // Add or icon
+                    let iconDiv = c.querySelector('.card-icon');
+                    if (iconDiv) {
+                        iconDiv.remove();
+                    }
+                    if (chipProperties[selectedChip] && chipProperties[selectedChip][c.id]) {
+
+                        if (chipProperties[selectedChip][c.id]['icon']) {
+                            iconDivClass = chipProperties[selectedChip][c.id]['icon'];
+                            iconDiv = document.createElement('i');
+                            iconDiv.classList.add('fa-solid');
+                            iconDiv.classList.add('card-icon');
+                            iconDiv.classList.add(iconDivClass)
+                            c.appendChild(iconDiv);
+                        }
                     }
                 });
 
