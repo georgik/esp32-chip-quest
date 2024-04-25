@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32 Chip Quest</title>
     <style>
+        body {
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "PingFangSC-Light", "PingFang SC Light", sans-serif !important;
+        }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -34,12 +38,18 @@
         .chip-card {
             width: 120px;
             height: 100px;
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
             margin: 10px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            background-color: gray;
+            background-color: lightgray;
+        }
+
+        .chip-card img {
+            max-width: 100px;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         .feature-card {
@@ -67,7 +77,7 @@
         .card {
             width: 100px;
             height: 80px;
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
             margin: 10px;
             padding: 10px;
             text-align: center;
@@ -135,13 +145,15 @@
                 'SPI-ETH': {},
                 'SD/MMC': {},
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
-                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"]
+                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"],
+                'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32-C6': {
                 'RAM': {info: '420'},
                 'WiFi' : { 'info':'WiFi 6' },
                 'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
-                'solutions': [ "IoT", "Connectivity", "Low-Power Applications"]
+                'solutions': [ "IoT", "Connectivity", "Low-Power Applications"],
+                'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32-P4': {
                 'RAM': {info: '620'},
@@ -149,14 +161,16 @@
                 'LCD': { 'info': 'MIPI-DSI: 1280x800'},
                 'CAM': {'info': 'MIPI-CSI'},
                 'software': [ 'ESP-IDF', 'Rust'],
-                'solutions': [  "Multimedia and HMI" ]
+                'solutions': [  "Multimedia and HMI" ],
+                'icon': 'images/esp32-c6-socs.png'
             },
             'ESP32': {
                 'RAM': {info: '400'},
                 'ETH': {},
                 'PSRAM':{ 'info': '2-32MB' },
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
-                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"]
+                'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"],
+                'icon': 'images/esp32-c6-socs.png'
             }
         };
 
@@ -168,6 +182,14 @@
             chipCard.id = chip;
             chipCard.textContent = chip;
             chipsRow.appendChild(chipCard);
+            // Create image element
+            if (chipProperties[chip] && chipProperties[chip]['icon']) {
+                const chipIcon = document.createElement('img');
+                chipIcon.src = chipProperties[chip]['icon'];
+                chipIcon.alt = chip + " icon";
+                chipCard.appendChild(chipIcon);
+            }
+
         });
 
         // Populate feature card elements
