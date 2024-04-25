@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32 Chip Quest</title>
     <style>
-        body {
+    body {
             font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "PingFangSC-Light", "PingFang SC Light", sans-serif !important;
+            display: flex;
+            justify-content: space-between; /* Adjust for left HUD */
+            align-items: center;
+            margin-top: 50px;
         }
+
+        .hud {
+            width: 200px;
+            height: 100vh;
+            padding: 10px;
+            background-color: lightgray;
+            border: 1px solid gray;
+            margin: 10px;
+        }
+
 
         .container {
             display: flex;
@@ -117,9 +131,9 @@
     <script src="https://kit.fontawesome.com/2eb6c86393.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>ESP32 Chip Quest</h1>
 
     <div class="container">
+
         <h2>Chips</h2>
         <div class="chips-row">
         </div>
@@ -134,6 +148,14 @@
 
         <h2>Solutions</h2>
         <div class="solutions-row">
+        </div>
+    </div>
+    <div class="hud" id="right-hud">
+        <h1>Chip Quest</h1>
+
+        <h3>Examples</h3>
+        <div class="examples-container">
+
         </div>
     </div>
 
@@ -158,14 +180,28 @@
                     'icon': 'fa-camera'
                 },
                 'USB': {
-                    'info':'USB2.0',
+                    'info': 'USB2.0',
                     'icon': 'fa-usb'
                 },
                 'SPI-ETH': {},
                 'SD/MMC': {},
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
                 'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"],
-                'icon': 'images/esp32-c6-socs.png'
+                'icon': 'images/esp32-c6-socs.png',
+                'examples': [
+                    {
+                        'name': 'Blinky',
+                        'url': 'https://wokwi.com/projects/341952826535051858'
+                    },
+                    {
+                        'name': 'WiFi Scan',
+                        'url': 'https://wokwi.com/projects/305569599398609473'
+                    },
+                    {
+                        'name': 'Joke Machine',
+                        'url': 'https://wokwi.com/projects/342032431249883731'
+                    }
+                 ]
             },
             'ESP32-C6': {
                 'RAM': {
@@ -276,6 +312,25 @@
                 solutionsRow.classList.remove('disabled');
 
                 const selectedChip = card.id;
+
+                // Clear existing examples
+                const examplesContainer = document.querySelector('#right-hud > div.examples-container');
+                examplesContainer.innerHTML = '';
+
+                // Populate examples if available
+                if (chipProperties[selectedChip] && chipProperties[selectedChip]['examples']) {
+                    const examplesList = document.createElement('ul');
+                    chipProperties[selectedChip]['examples'].forEach(example => {
+                        const exampleItem = document.createElement('li');
+                        const exampleLink = document.createElement('a');
+                        exampleLink.textContent = example['name'];
+                        exampleLink.href = example['url'];
+                        exampleLink.target = '_blank'; // Open link in a new tab
+                        exampleItem.appendChild(exampleLink);
+                        examplesList.appendChild(exampleItem);
+                    });
+                    examplesContainer.appendChild(examplesList);
+                }
 
                 featureCards.forEach(c => {
                     c.classList.remove('active');
