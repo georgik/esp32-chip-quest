@@ -153,10 +153,14 @@
     <div class="hud" id="right-hud">
         <h1>Chip Quest</h1>
 
+        <h3>Availability</h3>
+        <div class="availability-container">
+        </div>
+
         <h3>Examples</h3>
         <div class="examples-container">
-
         </div>
+
     </div>
 
     <script>
@@ -201,7 +205,11 @@
                         'name': 'Joke Machine',
                         'url': 'https://wokwi.com/projects/342032431249883731'
                     }
-                 ]
+                 ],
+                'availability': {
+                    'start': '2022',
+                    'end': '2034'
+                }
             },
             'ESP32-C6': {
                 'RAM': {
@@ -211,7 +219,12 @@
                 'WiFi' : { 'info':'WiFi 6' },
                 'software': [ 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
                 'solutions': [ "IoT", "Connectivity", "Low-Power Applications"],
-                'icon': 'images/esp32-c6-socs.png'
+                'icon': 'images/esp32-c6-socs.png',
+                'availability': {
+                    'start': '2023',
+                    'end': '2035'
+                }
+
             },
             'ESP32-P4': {
                 'RAM': {
@@ -229,7 +242,12 @@
                 },
                 'software': [ 'ESP-IDF', 'Rust'],
                 'solutions': [  "Multimedia and HMI" ],
-                'icon': 'images/esp32-c6-socs.png'
+                'icon': 'images/esp32-c6-socs.png',
+                'availability': {
+                    'start': '2024',
+                    'end': '2036'
+                }
+
             },
             'ESP32': {
                 'RAM': {
@@ -240,7 +258,12 @@
                 'PSRAM':{ 'info': '2-32MB' },
                 'software': ['Arduino', 'ESP-IDF', 'MicroPython', 'CircuitPython', 'Rust', 'Rust no_std'],
                 'solutions': [ "IoT", "Connectivity", "Multimedia and HMI"],
-                'icon': 'images/esp32-c6-socs.png'
+                'icon': 'images/esp32-c6-socs.png',
+                'availability': {
+                    'start': '2016',
+                    'end': '2028'
+                }
+
             }
         };
 
@@ -330,6 +353,39 @@
                         examplesList.appendChild(exampleItem);
                     });
                     examplesContainer.appendChild(examplesList);
+                }
+
+                // Clear existing availability
+                const availabilityContainer = document.querySelector('#right-hud > div.availability-container');
+                availabilityContainer.innerHTML = '';
+
+                // Populate availability if available
+                if (chipProperties[selectedChip] && chipProperties[selectedChip]['availability']) {
+                    const availability = chipProperties[selectedChip]['availability'];
+                    const availabilityDiv = document.createElement('div');
+                    availabilityDiv.textContent = `Available: ${availability['start']} - ${availability['end']}`;
+                    availabilityContainer.appendChild(availabilityDiv);
+                    // Add information how many years are left
+                    const currentYear = new Date().getFullYear();
+                    const yearsLeft = availability['end'] - currentYear;
+                    const yearsLeftDiv = document.createElement('div');
+                    yearsLeftDiv.textContent = `Years left: ${yearsLeft}`;
+                    // Add fontawesome green check mark if yearsLeft is more than 5, add orange warning if less than 5 and more than 2, add red exclamation mark if less than 2
+                    const yearsLeftIcon = document.createElement('i');
+                    yearsLeftIcon.classList.add('fas');
+                    if (yearsLeft > 5) {
+                        yearsLeftIcon.classList.add('fa-check-circle');
+                        yearsLeftIcon.style.color = 'green';
+                    } else if (yearsLeft > 2) {
+                        yearsLeftIcon.classList.add('fa-exclamation-triangle');
+                        yearsLeftIcon.style.color = 'orange';
+                    } else {
+                        yearsLeftIcon.classList.add('fa-exclamation-circle');
+                        yearsLeftIcon.style.color = 'red';
+                    }
+                    availabilityContainer.appendChild(yearsLeftIcon);
+                    availabilityContainer.appendChild(yearsLeftDiv);
+
                 }
 
                 featureCards.forEach(c => {
