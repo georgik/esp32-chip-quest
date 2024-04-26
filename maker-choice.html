@@ -75,9 +75,49 @@
             min-width: 240px;
             background-color: #f9f9f9;
         }
+
+        .form-factors {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-factor {
+            padding: 10px 20px;
+            margin: 0 15px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-factor:hover {
+            background-color: #e0e0e0;
+        }
+
+        .svg-container {
+            position: relative;
+            z-index: 1;
+        }
+        .form-factor a {
+            display: block;
+            color: black; /* Change as needed */
+            text-decoration: none;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid transparent; /* Add border to enhance visibility on hover */
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .form-factor a:hover {
+            background-color: #f0f0f0; /* Light grey background on hover */
+            border-color: #ccc; /* Matching border color */
+        }
     </style>
 </head>
 <body>
+    <div class="svg-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+        <svg id="connector-svg" style="width: 100%; height: 100%;">
+        </svg>
+    </div>
+
     <div class="container">
         <h1>ESP32 Maker Path</h1>
         <div class="chip-row">
@@ -95,7 +135,7 @@
                     <ul id="features-lost-left" class="features-list lost"></ul>
                 </div>
             </div>
-            <div class="chip-box">
+            <div id="current-chip-box" class="chip-box">
                 <div id="current-chip" class="chip-name">ESP32-S3</div>
                 <img src="images/esp32-c6-socs.png" class="chip-image">
                 <div id="availability-current" class="availability"></div>
@@ -115,6 +155,27 @@
                 <div id="availability-right" class="availability"></div>
             </div>
         </div>
+
+        <div class="form-factors" style="display: none; margin-top: 20px;">
+            <div class="form-factor" id="devkit">
+                <h2>DevKits</h2>
+                <a href="https://www.espressif.com/en/products/devkits/esp32-s3-devkitc-1" target="_blank">ESP32-S3-DevKitC-1</a>
+                <a href="https://www.espressif.com/en/products/devkits/esp32-s3-devkitc-1u" target="_blank">ESP32-S3-DevKitC-1U</a>
+                <a href="https://www.espressif.com/en/products/devkits/esp32-s3-devkitm-1" target="_blank">ESP32-S3-DevKitM-1</a>
+            </div>
+            <div class="form-factor" id="module">
+                <h2>Modules</h2>
+                <a href="https://www.espressif.com/en/products/modules/esp32-s3-wroom-1" target="_blank">ESP32-S3-WROOM-1</a>
+                <a href="https://www.espressif.com/en/products/modules/esp32-s3-wroom-1u" target="_blank">ESP32-S3-WROOM-1U</a>
+                <a href="https://www.espressif.com/en/products/modules/esp32-s3-min-1" target="_blank">ESP32-S3-MINI-1</a>
+            </div>
+            <div class="form-factor" id="chip">
+                <h2>Chips</h2>
+                <a href="https://www.espressif.com/en/products/socs/esp32-s3" target="_blank">ESP32-S3</a>
+                <a href="https://www.espressif.com/en/products/socs/esp32-s3-pico-1" target="_blank">ESP32-S3-PICO</a>
+            </div>
+        </div>
+
     </div>
 
     <script src="js/maker-choice.js"></script>
