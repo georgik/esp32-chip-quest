@@ -15,7 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: mkdir public && cp index.html public/index.html && cp -r images public/images
+      - run: |
+            mkdir public
+            cp index.html public/index.html
+            cp maker-choice.html public/maker-choice.html
+            cp -r js public/js
+            cp -r images public/images
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

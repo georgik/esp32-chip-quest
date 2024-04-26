@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Chip Selector</title>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/2eb6c86393.css" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .chip-row {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .arrow-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 60px;
+        }
+        .arrow {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .features-box {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features-list.added {
+            color: darkgreen;
+        }
+        .features-list.lost {
+            color: orange;
+        }
+        .chip-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-width: 200px;
+        }
+        .chip-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .chip-image {
+            width: 100px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+        .availability {
+            font-size: 12px;
+        }
+        #current-chip {
+            font-size: 2em;
+            padding: 15px;
+            min-width: 240px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ESP32 Maker Path</h1>
+        <div class="chip-row">
+            <div class="chip-box">
+                <div id="chip-left" class="chip-name">ESP32</div>
+                <img src="images/esp32-c6-socs.png" class="chip-image">
+                <div id="availability-left" class="availability"></div>
+            </div>
+            <div class="arrow-box">
+                <div class="features-box">
+                    <ul id="features-added-left" class="features-list added"></ul>
+                </div>
+                <div class="arrow">←</div>
+                <div class="features-box">
+                    <ul id="features-lost-left" class="features-list lost"></ul>
+                </div>
+            </div>
+            <div class="chip-box">
+                <div id="current-chip" class="chip-name">ESP32-S3</div>
+                <img src="images/esp32-c6-socs.png" class="chip-image">
+                <div id="availability-current" class="availability"></div>
+            </div>
+            <div class="arrow-box">
+                <div class="features-box">
+                    <ul id="features-added-right" class="features-list added"></ul>
+                </div>
+                <div class="arrow">→</div>
+                <div class="features-box">
+                    <ul id="features-lost-right" class="features-list lost"></ul>
+                </div>
+            </div>
+            <div class="chip-box">
+                <div id="chip-right" class="chip-name">ESP32-C6</div>
+                <img src="images/esp32-c6-socs.png" class="chip-image">
+                <div id="availability-right" class="availability"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/maker-choice.js"></script>
+</body>
+</html>
