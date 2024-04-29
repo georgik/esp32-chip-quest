@@ -92,29 +92,36 @@ body {
 }
 .form-factor a {
     display: block;
-    color: black; /* Change as needed */
+    color: black;
     text-decoration: none;
     margin: 5px 0;
     padding: 5px;
-    border: 1px solid transparent; /* Add border to enhance visibility on hover */
+    border: 1px solid transparent;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .form-factor a:hover {
-    background-color: #f0f0f0; /* Light grey background on hover */
-    border-color: #ccc; /* Matching border color */
+    background-color: #f0f0f0;
+    border-color: #ccc;
 }
 
 #scroll-indicator {
-    display: none; /* Initially hidden */
+    display: none;
     font-size: 2em;
-    color: #555; /* Adjust color based on theme */
+    color: #555;
 }
 
 .form-factors.show {
-    display: flex; /* Adjust based on your visibility toggling logic */
+    display: flex;
 }
 
 .form-factors.show + #scroll-indicator {
-    display: block; /* Show the indicator when form factors are visible */
+    display: block;
+}
+
+.devkit-thumbnail {
+    width: 100%;
+    max-width: 60px;
+    height: auto;
+    margin: 10px 0;
 }
