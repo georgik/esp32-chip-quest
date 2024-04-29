@@ -72,6 +72,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .form-factor {
     padding: 10px 20px;
@@ -79,6 +80,7 @@ body {
     border: 1px solid #ccc;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 30%;
 }
 .form-factor:hover {
     background-color: #e0e0e0;
@@ -101,4 +103,18 @@ body {
 .form-factor a:hover {
     background-color: #f0f0f0; /* Light grey background on hover */
     border-color: #ccc; /* Matching border color */
+}
+
+#scroll-indicator {
+    display: none; /* Initially hidden */
+    font-size: 2em;
+    color: #555; /* Adjust color based on theme */
+}
+
+.form-factors.show {
+    display: flex; /* Adjust based on your visibility toggling logic */
+}
+
+.form-factors.show + #scroll-indicator {
+    display: block; /* Show the indicator when form factors are visible */
 }

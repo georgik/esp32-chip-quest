@@ -89,7 +89,6 @@ let formFactorsVisible = false;
 
 document.getElementById('current-chip-box').addEventListener('click', function() {
     toggleFormFactors();
-    setTimeout(drawConnectors, 10); // Delay drawing to ensure layout has updated
 });
 
 function toggleFormFactors() {
@@ -100,15 +99,10 @@ function toggleFormFactors() {
     } else {
         formFactors.style.display = "none";
         formFactorsVisible = false;
-        clearConnectors(); // Clear connectors when hiding form factors
     }
 }
 
 
-function clearConnectors() {
-    const svgElement = document.getElementById('connector-svg');
-    svgElement.innerHTML = '';
-}
 
 
 // Add event listeners to form factors
@@ -126,32 +120,6 @@ function showFormFactorDetails(formFactor) {
     console.log("Selected Form Factor:", formFactor);
     // Placeholder for displaying images or details related to the selected form factor
     // Implement actual display logic or update page content here
-}
-
-function drawConnectors() {
-    const svgElement = document.getElementById('connector-svg');
-    svgElement.innerHTML = ''; // Clear previous paths
-
-    const chipBox = document.getElementById('current-chip-box').getBoundingClientRect();
-    const formFactors = document.querySelectorAll('.form-factor');
-    const startX = chipBox.left + chipBox.width / 2; // Center bottom of the chip box
-    const startY = chipBox.bottom;
-
-    formFactors.forEach(factor => {
-        const factorBox = factor.getBoundingClientRect();
-        const endX = factorBox.left + factorBox.width / 2; // Center top of each form factor box
-        const endY = factorBox.top;
-
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', startX);
-        line.setAttribute('y1', startY);
-        line.setAttribute('x2', endX);
-        line.setAttribute('y2', endY);
-        line.setAttribute('stroke', 'black');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('stroke-dasharray', '5,5');
-        svgElement.appendChild(line);
-    });
 }
 
 
