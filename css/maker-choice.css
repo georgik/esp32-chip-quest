@@ -125,3 +125,40 @@ body {
     height: auto;
     margin: 10px 0;
 }
+
+
+.form-factors {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-factor {
+    padding: 10px 20px;
+    margin: 0 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+
+.form-factor li {
+    list-style-type: none;
+    text-align: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.form-factor img {
+    width: 100px;
+    height: auto;
+}
+
+.form-factor span {
+    display: block;
+}

@@ -193,7 +193,7 @@ function renderDevKits() {
     const devkitList = document.getElementById('devkit-list');
     devkitList.innerHTML = devkits.map(devkit => `
         <li>
-            <img class="devkit-thumbnail" src="${devkit.image}" alt="${devkit.name}">
+            <img class="devkit-thumbnail" src="${devkit.image}" alt="${devkit.name}" style="max-width:100px; height:auto;">
             <span>${devkit.name}</span>
         </li>
     `).join('');
@@ -204,7 +204,7 @@ function renderModules() {
     const moduleList = document.getElementById('module-list');
     moduleList.innerHTML = modules.map(module => `
         <li>
-            <img src="${module.image}" alt="${module.name}">
+            <img src="${module.image}" alt="${module.name}" style="max-width:100px; height:auto;">
             <span>${module.name}</span>
         </li>
     `).join('');
@@ -215,7 +215,7 @@ function renderChips() {
     const socList = document.getElementById('chip-list');
     socList.innerHTML = socs.map(soc => `
         <li>
-            <img src="${soc.image}" alt="${soc.name}">
+            <img src="${soc.image}" alt="${soc.name}" style="max-width:100px; height:auto;">
             <span>${soc.name}</span>
         </li>
     `).join('');
