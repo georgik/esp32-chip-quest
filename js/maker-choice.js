@@ -49,19 +49,43 @@ const chipProperties = {
         'devkits': [
             {
                 'name': 'ESP32-S3-BOX-3',
-                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-BOX-3_S.png'
+                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-BOX-3_S.png',
+                'doc': 'https://github.com/espressif/esp-box/blob/master/docs/hardware_overview/esp32_s3_box_3/hardware_overview_for_box_3.md',
+                'bsp': 'https://components.espressif.com/components/espressif/esp-box-3',
+                'shop': 'https://www.espressif.com/en/products/devkits/esp32-s3-box-3',
+                'video': 'https://www.youtube.com/watch?v=3Q1Z9Q1Z9Qw',
+                'wokwi' : 'https://wokwi.com/esp32-s3-box-3',
+                'example': 'https://github.com/espressif/esp-box/tree/master/examples/esp_joystick/joystick_controller'
             },
             {
                 'name': 'M5Stack CoreS3',
-                'image': 'https://static-cdn.m5stack.com/resource/docs/products/core/CoreS3/img-9618aed2-e595-4bb4-ac53-e0b9772aefd6.webp'
+                'image': 'https://static-cdn.m5stack.com/resource/docs/products/core/CoreS3/img-9618aed2-e595-4bb4-ac53-e0b9772aefd6.webp',
+                'doc': 'https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3-box-3.html',
+                'bsp': 'https://components.espressif.com/components/espressif/esp-box-3',
+                'shop': 'https://www.espressif.com/en/products/devkits/esp32-s3-box-3',
+                'video': 'https://www.youtube.com/watch?v=3Q1Z9Q1Z9Qw',
+                'wokwi' : 'https://wokwi.com/esp32-s3-box-3',
+                'example': 'https://github.com/espressif/esp-box/tree/master/examples/esp_joystick/joystick_controller'
             },
             {
                 'name': 'ESP32-S3-DevKitM-1',
-                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-DevKitM-1_S.png'
+                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-DevKitM-1_S.png',
+                'doc': 'https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3-box-3.html',
+                'bsp': 'https://components.espressif.com/components/espressif/esp-box-3',
+                'shop': 'https://www.espressif.com/en/products/devkits/esp32-s3-box-3',
+                'video': 'https://www.youtube.com/watch?v=3Q1Z9Q1Z9Qw',
+                'wokwi' : 'https://wokwi.com/esp32-s3-box-3',
+                'example': 'https://github.com/espressif/esp-box/tree/master/examples/esp_joystick/joystick_controller'
             },
             {
                 'name': 'ESP32-S3-DevKitC-1',
-                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-DevKitC-1%20%E5%B0%8F.png'
+                'image': 'https://www.espressif.com/sites/default/files/dev-board/ESP32-S3-DevKitC-1%20%E5%B0%8F.png',
+                'doc': 'https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3-box-3.html',
+                'bsp': 'https://components.espressif.com/components/espressif/esp-box-3',
+                'shop': 'https://www.espressif.com/en/products/devkits/esp32-s3-box-3',
+                'video': 'https://www.youtube.com/watch?v=3Q1Z9Q1Z9Qw',
+                'wokwi' : 'https://wokwi.com/esp32-s3-box-3',
+                'example': 'https://github.com/espressif/esp-box/tree/master/examples/esp_joystick/joystick_controller'
             }
         ],
         'modules': [
@@ -187,17 +211,35 @@ document.getElementById('current-chip-box').addEventListener('click', function()
     toggleFormFactors();
 });
 
+document.getElementById('next-step-pointer').addEventListener('click', function() {
+    toggleFormFactors();
+});
+
+document.getElementById('form-factor-title').addEventListener('click', function() {
+    toggleFormFactors();
+});
+
 
 function renderDevKits() {
     const devkits = chipProperties[chips[currentChipIndex]].devkits;
     const devkitList = document.getElementById('devkit-list');
     devkitList.innerHTML = devkits.map(devkit => `
         <li>
-            <img class="devkit-thumbnail" src="${devkit.image}" alt="${devkit.name}" style="max-width:100px; height:auto;">
+            <img class="devkit-thumbnail" src="${devkit.image}" alt="${devkit.name}" style="width:100px; height:auto;">
             <span>${devkit.name}</span>
+            <div class="devkit-links">
+                <a href="${devkit.doc}" target="_blank" title="Documentation"><i class="fas fa-book"></i></a>
+                <a href="${devkit.bsp}" target="_blank" title="Board Support Package"><i class="fas fa-microchip"></i></a>
+                <a href="${devkit.shop}" target="_blank" title="Shop"><i class="fas fa-shopping-cart"></i></a>
+                <a href="${devkit.video}" target="_blank" title="Video"><i class="fas fa-video"></i></a>
+                <a href="${devkit.wokwi}" target="_blank" title="Simulator"><i class="fas fa-vr-cardboard"></i></a>
+                <a href="${devkit.example}" target="_blank" title="Example Code"><i class="fas fa-code"></i></a>
+            </div>
         </li>
     `).join('');
 }
+
+
 
 function renderModules() {
     const modules = chipProperties[chips[currentChipIndex]].modules;

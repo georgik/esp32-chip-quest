@@ -1,16 +1,23 @@
-body {
-    font-family: Arial, sans-serif;
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .container {
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 }
+
 .chip-row {
     display: flex;
     align-items: center;
@@ -161,4 +168,47 @@ body {
 
 .form-factor span {
     display: block;
+}
+
+.devkit-links {
+    display: flex; /* Align items in a row */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+    gap: 10px; /* Space between each icon */
+    margin-top: 10px; /* Space above the icon row */
+}
+
+.devkit-links a {
+    color: #333; /* Icon color */
+    transition: color 0.3s ease;
+    text-decoration: none; /* Removes underline from links */
+    display: flex; /* Ensures the tooltip text does not appear underlined */
+    flex-direction: column; /* Aligns the icon and text vertically for clarity */
+    align-items: center; /* Center align the text below icons */
+    font-size: 16px; /* Icon size */
+}
+
+.devkit-links a:hover {
+    color: #0056b3; /* Color change on hover for better user feedback */
+}
+
+.devkit-links i {
+    margin-bottom: 4px; /* Space between icon and text */
+}
+
+#next-step-pointer {
+    font-size: large;
+    cursor: pointer;
+}
+
+#next-step-pointer:hover {
+    color: #0056b3;
+}
+
+#form-factor-title {
+    cursor: pointer;
+}
+
+#form-factor-title:hover {
+    color: #0056b3;
 }
