@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     display: flex;
@@ -48,7 +49,18 @@ body, html {
 .features-list.lost {
     color: orange;
 }
+
+.settings-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #668;
+    z-index: 2;
+}
+
 .chip-box {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,6 +68,7 @@ body, html {
     padding: 10px;
     min-width: 200px;
 }
+
 .chip-name {
     font-size: 24px;
     margin-bottom: 10px;
@@ -171,29 +184,29 @@ body, html {
 }
 
 .devkit-links {
-    display: flex; /* Align items in a row */
-    justify-content: center; /* Center the items horizontally */
-    align-items: center; /* Center the items vertically */
-    gap: 10px; /* Space between each icon */
-    margin-top: 10px; /* Space above the icon row */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .devkit-links a {
-    color: #333; /* Icon color */
+    color: #333;
     transition: color 0.3s ease;
-    text-decoration: none; /* Removes underline from links */
-    display: flex; /* Ensures the tooltip text does not appear underlined */
-    flex-direction: column; /* Aligns the icon and text vertically for clarity */
-    align-items: center; /* Center align the text below icons */
-    font-size: 16px; /* Icon size */
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
 }
 
 .devkit-links a:hover {
-    color: #0056b3; /* Color change on hover for better user feedback */
+    color: #0056b3;
 }
 
 .devkit-links i {
-    margin-bottom: 4px; /* Space between icon and text */
+    margin-bottom: 4px;
 }
 
 #next-step-pointer {
@@ -212,3 +225,74 @@ body, html {
 #form-factor-title:hover {
     color: #0056b3;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.chip-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.chip-selection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chip-selection-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chip-selection-item img {
+    width: 60px;
+    height: auto;
+}
+
+.chip-selection-item span {
+    margin-top: 5px;
+    text-align: center;
+}
+

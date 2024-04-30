@@ -18,6 +18,7 @@
         <h1>ESP32 Maker Path</h1>
         <div class="chip-row">
             <div class="chip-box">
+                <i class="fas fa-cog settings-icon"></i>
                 <div id="chip-left" class="chip-name">ESP32</div>
                 <img src="images/esp32-c6-socs.png" class="chip-image">
                 <div id="availability-left" class="availability"></div>
@@ -35,6 +36,7 @@
                 <div id="current-chip" class="chip-name">ESP32-S3</div>
                 <img src="images/esp32-c6-socs.png" class="chip-image">
                 <div id="availability-current" class="availability"></div>
+                <i class="fas fa-cog settings-icon" data-position="middle"></i>
             </div>
             <div class="arrow-box">
                 <div class="features-box">
@@ -46,6 +48,7 @@
                 </div>
             </div>
             <div class="chip-box">
+                <i class="fas fa-cog settings-icon"></i>
                 <div id="chip-right" class="chip-name">ESP32-C6</div>
                 <img src="images/esp32-c6-socs.png" class="chip-image">
                 <div id="availability-right" class="availability"></div>
@@ -71,8 +74,20 @@
             </div>
         </div>
 
+        <!-- Chip Selection Modal -->
+        <div id="chip-selection-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Select a Chip</h3>
+                <div id="chip-selection-list" class="chip-selection-grid"></div>
+            </div>
+        </div>
+
+
+
     </div>
 
+    <script src="js/maker-data.js"></script>
     <script src="js/maker-choice.js"></script>
 </body>
 </html>
